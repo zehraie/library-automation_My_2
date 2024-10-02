@@ -21,10 +21,26 @@ Feature: Login to the application
       | studen    |
 
 
-# TODO: Verify users can not login with invalid credentials
+@lib-01-02
+  # TODO: Verify users can not login with invalid credentials
+  Scenario Outline: Verify users can not login with invalid credentials
+    When user enter invalid username "<invalid-username>"
+    And user enter invalid password "<invalid-password>"
+    And user clicks the login button
+    Then user should see a "Sorry, Wrong Email or Password" error pop-up
+    Examples:
+      | invalid-username | invalid-password |
+      | library@student  | password123      |
+      | library@cydeo    | libraryPassword  |
 
 
 # TODO: Verify users are not allowed to login without any credentials
+
+@lib-01-03
+  # TODO: Verify users are not allowed to login without any credentials
+  Scenario: Verify users are not allowed to login without any credentials
+    When user clicks the login button
+    Then user should see a "This field is required." error pop-up
 
 
     #? Should there be more scenarios for this user story? Feel free to add more scenarios.
